@@ -111,16 +111,7 @@ Fishy.Fish.prototype = {
             
             if (this.isPlayer) {
                 var dirString;
-                /*
-                switch (this.direction) {
-                        case Direction.UP: dirString = 'up - '; break;
-                        case Direction.RIGHT: dirString = 'right - '; break;
-                        case Direction.DOWN: dirString = 'down - '; break;
-                        case Direction.LEFT: dirString = 'left - '; break;
-                }
-                console.log(dirString + "x1: " + this.getx() +  "   -   x2: " + this.getx2());
-                console.log(dirString + "y1: " + this.gety() + "   -   y2: " + this.gety2());
-                */
+               
             }
             if (dir != -1) {
             switch (dir) {
@@ -158,17 +149,6 @@ Fishy.Fish.prototype = {
             }
             if (this.isPlayer) {
                 var dirString;
-                /*
-                switch (this.direction) {
-                        case Direction.UP: dirString = 'up - '; break;
-                        case Direction.RIGHT: dirString = 'right - '; break;
-                        case Direction.DOWN: dirString = 'down - '; break;
-                        case Direction.LEFT: dirString = 'left - '; break;
-                }
-                console.log(dirString + "x1: " + this.getx() +  "   -   x2: " + this.getx2());
-                console.log(dirString + "y1: " + this.gety() + "   -   y2: " + this.gety2());
-                console.log("\n");
-                */
             }
             
         }
@@ -243,10 +223,20 @@ Fishy.Fish.prototype = {
             this.menu.scale.setTo(1.5);
             
             this.game.add.text(this.game.world.centerX, this.game.world.centerY - 60, "You've Been Eaten!").anchor.setTo(0.5);
-            this.game.add.text(this.game.world.centerX - 75, this.game.world.centerY, "Score:     " + Fishy_HUD.getScore()).fill = '#ffffff';
+            this.game.add.text(this.game.world.centerX - 75, this.game.world.centerY - 15, "Score:     " + Fishy_HUD.getScore()).fill = '#ffffff';
             
-            this.game.time.events.add(Phaser.Timer.SECOND * 0.5, function() { this.game.paused = true; }, this);
-        
+            //this.game.time.events.add(Phaser.Timer.SECOND * 0.5, function() { this.game.paused = true; }, this);
+            
+        this.restartButton = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY + 50, 'playbutton');
+        this.restartButton.anchor.setTo(0.5, 0.5);
+        this.restartButton.inputEnabled = true;
+        this.restartButton.events.onInputDown.add(this.restartTouch, this);
+        this.sprite.y = -1000; //hack
+        this.sprite.x = -60; //hackhackhack
+    },
+    
+    restartTouch: function(button) {
+        parent.document.getElementById(window.name).src += '';
     },
     
     getHit: function(otherFish) {
@@ -333,32 +323,14 @@ Fishy.Fish.prototype = {
                             this.die(true);
                     } else {
                         
-                        //enemy going left, i'm going up or down
-                        //if overlapX > overlapY, hit is on top or botton - i kill
-                            // else
-                        //overlapY > X, hit is left or right - enemy kills i
+                        
                         if (this.getOverlapX(otherFish) + 4 > this.getOverlapY(otherFish)) {
                             this.die(true);
                         } else if (this.active) {
                             
                             otherFish.sprite.x = 9000;
                             this.playerDie();
-                        }/*
-                        if (otherFish.getx2() > this.getx() && otherFish.getx() < this.getx2()) {
-                            showCorners(this);
-                            this.die(true);
-                        } else {
-                            showCorners(this);
-                            console.log("\n my x2: " + otherFish.getx2() + ",    enemy x: " + this.getx());
-                            console.log(otherFish.getx2() > this.getx());
-                            
-                            console.log('\n my x: ' + otherFish.getx() + ',    enemy x2: ' + this.getx2());
-                            console.log(otherFish.getx() < this.getx2());
-                            
-                            console.log('\nim here');
-                            console.log(otherFish.direction);
-                            otherFish.sprite.x = 9000;
-                        }*/
+                        }
                     }
                     break;
         }

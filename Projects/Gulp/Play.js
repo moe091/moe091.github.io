@@ -31,7 +31,6 @@ Fishy.Play.prototype = {
     },
     
     createStar: function() {
-        console.log('create star');
         this.starFish = this.game.add.sprite(20 + Math.random() * 460, - 20, 'starfish');
         this.game.physics.enable(this.starFish, Phaser.Physics.ARCADE);
         this.starFish.body.velocity.y = 40;
@@ -48,13 +47,11 @@ Fishy.Play.prototype = {
                     this.starFish.kill();
                     this.spawnStar();
                 }
-                console.log("can't make a star, he already bes alive!");
             }
         } else {
             this.createStar();
         }
         
-        console.log('spawned star - ' + (this.starFishTime - this.game.time.now))
     },
     
     create: function() {
@@ -87,17 +84,6 @@ Fishy.Play.prototype = {
         new Fishy.Fish(this.game, 'CLOWN', this.enemies);
         this.myFish.update = function() {  
             while (this.processDragEvent(Fishy_input.getDragEvent()));
-            /*  
-            var dirString;
-            switch (this.direction) {
-                    case Direction.UP: dirString = 'up - '; break;
-                    case Direction.RIGHT: dirString = 'right - '; break;
-                    case Direction.DOWN: dirString = 'down - '; break;
-                    case Direction.LEFT: dirString = 'left - '; break;
-            }
-            console.log(dirString + "x1: " + this.getx() +  "   -   x2: " + this.getx2());
-            console.log(dirString + "y1: " + this.gety() + "   -   y2: " + this.gety2());
-            */
         }
         
         Fishy_HUD.setScore(0);
@@ -135,11 +121,8 @@ Fishy.Play.prototype = {
         this.updateReef();
         
         if (this.game.time.now > this.starFishTime) {
-            console.log('star spawn time');
             this.spawnStar();
-        } else {
-            console.log(this.starFish.y);
-        }
+        } 
     },
     
     nextStage: function() {

@@ -54,7 +54,6 @@ Fishy.HUD.prototype = {
             this.frameTime = this.game.time.now + 1000;
         }
         if (this.comboText.scale.x > 1 && this.game.time.now > this.scaleTime) {
-            console.log('combo ' + this.comboText.scale);
             this.comboText.scale.set(this.comboText.scale.x - (this.comboText.scale.x * this.comboText.scale.x) / 20);   
             this.scaleTime = this.game.time.now + 25;
         } 
