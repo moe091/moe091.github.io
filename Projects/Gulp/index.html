@@ -1,0 +1,44 @@
+<html>
+    <head>
+    
+        <script src="phaser.js"></script>
+        <script src="Boot.js"></script>
+        <script src="Preloader.js"></script>
+        <script src="StartMenu.js"></script>
+        <script src="Play.js"></script>
+        <script src="Fish.js"></script>
+        <script src="Input.js"></script>
+        <script src="Gameplay.js"></script>
+        <script src="Utils.js"></script>
+        <script src="PlayerFish.js"></script>
+        <script src="HUD.js"></script>
+        
+    </head>
+    
+    <body>
+        <script type="text/javascript">
+        
+            (function () {
+        
+            //	No parameters given, which means no default state is created or started
+            var game = new Phaser.Game(480, 320, Phaser.AUTO);
+            
+            
+            game.state.add('Boot', Fishy.Boot);
+            game.state.add('StartMenu', Fishy.StartMenu);
+            game.state.add('Preloader', Fishy.Preloader);
+            game.state.add('Play', Fishy.Play);
+                
+            game.state.start('Boot');
+                
+                
+                
+        })();
+            
+            
+
+    </script>
+    
+    </body>
+
+</html>
