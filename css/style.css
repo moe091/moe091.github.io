@@ -110,11 +110,13 @@ main {
     text-align: center;
     font-size: 1.2em;
     font-weight: 700;
+    width: 272px;
+    height: 2em;
 }
 
 .project-div .project-label {
     height: 1.2em;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #333;
     text-align: center;
 }
@@ -131,7 +133,21 @@ main {
     background-position: center;
 }
 
+#gulp-div .img-div {
+    background-image: url("../assets/projects/gulp.png");
+    background-size: 155%;
+    background-position: 20%;
+}
 
+#white-glove-div .img-div {
+    background-image: url("../assets/projects/white-glove.png");
+}
+
+#libra-div .img-div {
+    background-image: url("../assets/projects/libra.png");
+    background-size: 130%;
+    background-position: 45%
+}
 
 
 
