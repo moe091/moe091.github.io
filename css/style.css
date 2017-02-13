@@ -1,6 +1,20 @@
+html {
+    background-color: #f3f3f3;
+}
+
+body {
+    margin: 0 auto;
+    width: 1400px;
+    padding-top: 40px;
+    min-height: 1200px;
+    background-color: #fff;
+    border: 1px #ccc solid;
+    border-top: none;
+}
+
 header {
     width: 1200px;
-    margin: 50px auto;
+    margin: 0 auto;
     position: relative;
     border-bottom: 1px black solid;
 }
@@ -35,8 +49,116 @@ header h2 {
 
 section {
     background-image: url("../assets/text-bg.png");
-    margin: 0 auto;
+    margin: 30px auto 60px auto;
+    padding: 15px 10px 30px 15px;
     width: 720px;
-    height: 213px;
     text-align: center;
 }
+
+section h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #41424a;
+}
+
+section p {
+    margin: 0 10px;
+    font-size: 1.1em;
+    line-height: 1.2em;
+    font-family: 'Della Respira', serif;
+}
+
+main {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.projects-label {
+    font-size: 1.3em;
+    border-bottom: 1px black solid;
+    padding: 0px 0 2px 0;
+    margin-bottom: 20px;
+    width: 900px;
+    display: inline-block;
+}
+
+
+.project-div {
+    width: 280px;
+    height: 305px;
+    position: relative;
+    margin: 0 8px 20px 8px;
+    display: inline-block;
+}
+
+.project-div .img-div {
+    width: 278px;
+    height: 280px;
+    border: 1px #777 solid;
+    position: absolute;
+    bottom: 0;
+}
+
+.project-div .project-name {
+    position: absolute;
+    bottom: 0;
+    padding: 3px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #ddd;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 700;
+}
+
+.project-div .project-label {
+    height: 1.2em;
+    font-size: 1.2em;
+    color: #333;
+    text-align: center;
+}
+
+
+
+
+
+
+
+#lets-play-div .img-div {
+    background-image: url("../assets/projects/letsplay.png");
+    background-size: 110%;
+    background-position: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
