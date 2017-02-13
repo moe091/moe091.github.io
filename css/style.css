@@ -1,0 +1,42 @@
+header {
+    width: 1200px;
+    margin: 50px auto;
+    position: relative;
+    border-bottom: 1px black solid;
+}
+
+header h2 {
+    font-family: 'Alegreya', serif;
+    font-size: 2em;
+    display: inline-block;
+    margin: 0;
+}
+
+.nav-links {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.nav-links a {
+    display: inline-block;
+    font-size: 1.3em;
+    font-weight: 700;
+    margin: 0 20px;
+    color: #394f5d;
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: #57778b;
+}
+
+
+
+section {
+    background-image: url("../assets/text-bg.png");
+    margin: 0 auto;
+    width: 720px;
+    height: 213px;
+    text-align: center;
+}
