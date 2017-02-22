@@ -121,6 +121,26 @@ main {
     text-align: center;
 }
 
+.project-div {
+    
+}
+.project-div a {
+
+}
+
+.img-overlay {
+    position: absolute;
+    top: 22px;
+    bottom: 45px;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 10;
+}
+
+.project-div:hover .img-overlay {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 
 
