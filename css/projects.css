@@ -79,5 +79,20 @@ content {
     background-size: 100%;
 }
 
+#libra-img {
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px #aaa solid;
+    background-color: #f6f8fb;
+}
+
+
+#gulp-div {
+    text-align: center;
+}
+iframe {
+    background-color: #000;
+}
 
 

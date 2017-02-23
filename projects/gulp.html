@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8">
+        
+        <title>Maurice Nowicki | Portfolio</title>
+        
+        <meta name="description" content="Web and Software Developer Portfolio Page for Maurice Nowicki">
+        <meta name="author" content="Maurice Nowicki">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <link rel="stylesheet" href="../css/reset.css" type="text/css">
+        <link rel="stylesheet" href="../css/style.css" type="text/css">
+        <link rel="stylesheet" href="../css/projects.css" type="text/css">
+        <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        <link href="https://fonts.googleapis.com/css?family=Montserrat|Alegreya|Della+Respira" rel="stylesheet">
+        
+    </head>
+    
+    <body>
+    
+        <header>
+            <nav>
+                <span class="name"><h2>Maurice Nowicki</h2></span>
+                <span class="nav-links">
+                    <a href="../index.html">Portfolio</a>
+                    <a href="#">Resume</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                </span>
+            </nav>
+        </header>
+        
+        
+        <h1>Let's Play - 100 Card, Dart, Dice, and Domino Games</h1>
+        
+        
+        <content>
+            <h2>Description</h2>
+                <p>I created Gulp! when HTML5 and WebGL first began picking up some momentum on mobile web browsers. Mobile games that you could play right in your web browser without downloading anything were almost unheard of then and mobile-browser-game portal websites were starting to pop up, hoping they could beat everyone to the punch and become the 'addictinggames.com' of the mobile era. I built this game with the Phaser(an open source HTML5 game library that I contributed to) and sold licenses to a couple different mobile portals. It runs all mobile and desktop web browsers that support HTML5 and runs with hardware acceleration via WebGL on devices that support it, or falls back on software rendering for devices that don't. The game is performance optimized so that it would run at a decent framerate even on older mobile devices and although the gameplay is quite simple and my homemade graphics could use some work, it's about as complex as mobile browser games could get at the time and holds its own even against todays HTML5 mobile games. </p>
+            
+            <div id="gulp-div">
+                <a href="../gulp/index.html">click here to play in a new window(required for fullscreen play)</a>
+                <br>
+                <iframe src="../gulp/index.html" height="340" width="500" align="center">game not available</iframe>
+            </div>
+
+            <h2>Technology and Features</h2>
+                <h4><b>Tech used: </b>Javascript, HTML5, WebGL/Canvas, Phaser</h4>
+                <p>
+                    The main challenge building this game was performance. I wanted to create a decent HTML5 game that would run on mobile browsers but at the time smartphones weren't as powerful and many of them didn't even support hardware acceleration so I had to use computing resources carefully if I wanted to create any kind of realtime game that would run at over 30 FPS. I hadn't done much complex javascript programming yet so I was forced to learn a lot while making this project to reach my goal. It took a while to wrap my head around prototypal inheritance, closures, and memory management in Javascript. It was a struggle to complete and I would've been better off getting more comfortable with javascript before tackling this project, but in the end I achieved what I set out to do.
+                </p>
+                <p>
+                    Javascript has a unique caveat when it comes to garbage collection, if it runs out of space and needs to free some up it stops all other processing while it deletes all freed objects, which is an issue for a realtime game because most browsers(at least back then) don't support multithreading and it causes the game to freeze for about half a second while it dumps all of its garbage on the same thread that the game is running on. To avoid this issue I wrote my own code to recycle all the objects the game creates so it's not constantly creating new objects and doesn't create any garbage to be collected.
+               </p>
+                <p>
+                    The game itself utilizes WebGL for hardware rendering but can also use software rendering on devices that don't support WebGL. It accepts mouse or touch input and runs fullscreen or embedded in a webpage on desktop and mobile devices. It uses simple rectangular collision detection(built in to Phaser) for first-pass collision detection and a custom collision checking method I created to determine who's hitting who and from what side when a collision occurs - which was actually a much more complicated problem to solve than I thought it would be.
+                </p>
+            
+            <h2>Personal Notes</h2>
+                <p>
+                    Creating this game knocked my javascript skill up a couple notches. Before this I only used it for simple tasks like creating dynamic menus or image sliders, this forced me to really learn the ins and outs of the language and allowed me to work on other larger javascript projects without having to struggle. 
+                </p>
+                <p>
+                    Aside from the code, I also created all the graphics myself(for better or worse) and designed the game itself. Now that smartphones are more powerful and I've gotten a little better with javascript and a lot better with graphics I'd like to try creating another mobile HTML game that's more complex and more fun, after I complete my current projects.
+                </p>
+        </content>
+    
+    
+    </body>
+</html>
+
+
+
+
+
