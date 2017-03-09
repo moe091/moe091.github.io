@@ -32,6 +32,12 @@ p {
     font-size: 1em;
 }
 
+.centered {
+    text-align: center;
+}
+.no-bottom {
+    margin-bottom: 0;
+}
 a h3 {
     text-align: center;
     color: #102a6d;
@@ -91,6 +97,8 @@ content {
 #gulp-div {
     text-align: center;
 }
+
+
 iframe {
     background-color: #000;
 }

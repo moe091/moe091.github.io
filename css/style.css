@@ -134,16 +134,22 @@ main {
     bottom: 45px;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(111, 111, 111, 0.2);
     z-index: 10;
     width: 280px;
-    height: 300px;
+    height: 280px;
 }
 
 .project-div:hover .img-overlay {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+.img-div h2 {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 2em;
+    color: #33569d;
+}
 
 
 
@@ -169,6 +175,12 @@ main {
     background-image: url("../assets/projects/libra.png");
     background-size: 130%;
     background-position: 45%
+}
+
+#phaser-div .img-div {
+    background-image: url("../assets/projects/phaser.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 
