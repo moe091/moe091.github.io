@@ -184,9 +184,13 @@ main {
 }
 
 
+.resume-image-div {
+    text-align: center;
+}
 
-
-
+.resume-image-div img {
+    border: 1px black solid;
+}
 
 
 
