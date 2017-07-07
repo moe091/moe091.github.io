@@ -80,6 +80,10 @@ BALL.play = {
         game.camera.follow(this.ball);
     },
     
+    render: function() {
+        console.log("RENDER");
+    },
+    
     update: function() {
         //console.log("main update - fps: " + game.time.fps);
         //console.log(game.time.fps);
@@ -107,10 +111,22 @@ BALL.play = {
             BALL.editor.update();
         }
         BALL.gameState.update();
+        
+        //game.debug.renderRectangle(floor,'#0fffff');
     },
     
     
     render: function() {
+        //console.log("render");
+        BALL.input.left.x = game.camera.x;
+        BALL.input.left.y = game.camera.y;
+        BALL.input.right.x = game.camera.x + game.camera.width * 0.75;
+        BALL.input.right.y = game.camera.y;
+        game.debug.geom(BALL.input.left, 'rgba(0, 0, 0, 0.05)');
+        game.debug.geom(BALL.input.right, 'rgba(0, 0, 0, 0.05)');
+        
+    game.debug.text( "This is debug text", 100, 380 );
+        //console.log(BALL.input.left);
         //game.debug.cameraInfo(game.camera, 52, 132);
         //game.debug.text("device: " + window.innerWidth + ", " + window.innerHeight, 420, 32);
         //game.debug.text("ratio: " + window.devicePixelRatio, 420, 100);

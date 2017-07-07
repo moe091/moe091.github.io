@@ -55,6 +55,7 @@ BALL.Trigger.prototype.callEvent = function() {
     console.log("trigger trig, ", this);
     console.log("done?" + this.done);
     if (!this.done) {
+        this.done = true;
         for (var i in this.events) {
             this.events[i].execute(this);
         }

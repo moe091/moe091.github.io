@@ -155,6 +155,11 @@ BALL.gameState = {
         for (var i in this.deadObjs) {
             this.restoreObject(this.deadObjs[i]);
         }
+        for (var i in this.objects) {
+            for (var j in this.objects[i].triggers) {
+                this.objects[i].triggers[j].done = false;
+            }
+        }
     }
     
     
