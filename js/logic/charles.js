@@ -10,7 +10,7 @@ BALL.input = {
     
     
     inputDown: function(event) {
-
+        console.log(event);
         if (!BALL.editor.editMode) {
             if (BALL.gameState.touchDown == false) {
                 BALL.gameState.downX = event.screenX;
