@@ -1,2 +1,0 @@
-Gulp
-    Change background graphic to something brighter to give it a less gloomy and more fun look/feel.

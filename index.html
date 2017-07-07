@@ -1,162 +1,319 @@
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
     <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta charset="utf-8">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" data-lang="html"><meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta charset="UTF-8" />
+        <title>Ball</title>
         
-        <title>Maurice Nowicki | Portfolio</title>
+        <link rel=stylesheet href="style.css" type="text/css">
         
-        <meta name="description" content="Web and Software Developer Portfolio Page for Maurice Nowicki">
-        <meta name="author" content="Maurice Nowicki">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link rel="stylesheet" href="css/reset.css" type="text/css">
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <!-----------------------LIBS----------------------->
+        <script src="libs/phaser.js"></script>
+        <script src="libs/jquery-3.2.1.js"></script>
         
-        <!--[if lt IE 9]>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+        <!------------------------GAME------------------------>
+        <!-- states -->
+        <script src="js/states/preload.js"></script>
+        <script src="js/states/menu.js"></script>
+        <script src="js/states/play.js"></script>
+        <!-- logic -->
+        <script src="js/logic/input.js"></script>
+        <script src="js/logic/gameState.js"></script>
+        <script src="js/logic/gObject.js"></script>
+        <script src="js/logic/timer.js"></script>
+        <!-- objects -->
+        <script src="js/objects/MovePath.js"></script>
+        <script src="js/objects/Trigger.js"></script>
+        <script src="js/objects/Event.js"></script>
         
-        <link href="https://fonts.googleapis.com/css?family=Montserrat|Alegreya|Della+Respira" rel="stylesheet">
+        <!----------------------Editor--------------------------->
+        <script src="Editor/mapEditor.js"></script>
+        <script src="Editor/editorUI.js"></script>
+        <script src="Editor/editorFunctions.js"></script>
+        <script src="Editor/pathEditor.js"></script>
+        <script src="Editor/triggerEditor.js"></script>
+        
         
         
     </head>
     <body>
-        <header>
-            <nav>
-                <span class="name"><h2>Maurice Nowicki</h2></span>
-                <span class="nav-links">
-                    <a href="index.html">Portfolio</a>
-                    <a href="resume.html">Resume</a>
-                    <a href="BALL/index.html">MY GAME</a>
-                </span>
-            </nav>
-        </header>
-        
-        <section>
-            <h1>PORTFOLIO</h1>
-            <p>Developing software has been my passion, my hobby, and at times my job for the past decade. Now I've decided that I want it to be my career. I've gathered on this page some samples of software I've created to demonstrates my competence and potential as a software engineer. All projects listed here are my own creations, and should provide evidence of my ability to pick up any new technologies and use them to implement well-written, real software projects.</p>
-        </section>
-    
-        <main>
-            <span class="projects-label">All Projects</span>
+        <style>
+
+        </style>
+
+    <script type="text/javascript">
+        function resizeGame() {
+            game.scale.setShowAll();
+            game.scale.refresh();
+        }
+
+        $( window ).resize(function() {
+            resizeGame();
+        });
+        window.onload = function() {
+            BALL.W = 600;
+            BALL.H = 360;
             
-            <div class="project-div" id="lets-play-div">
-                <div class="project-label">
-                    Android/Java App | Freelance
-                </div>
-                <a href="projects/letsplay.html">
-                    <div class="img-overlay"></div>
-                    <div class="img-div">
-                        <div class="project-name">
-                            Let's Play, 100 Card, Dice, Board, and Domino Games
+            BALL.scaleRatio = window.devicePixelRatio / 3;
+            
+            BALL.gWidth = Math.floor(window.innerWidth * window.devicePixelRatio);
+            BALL.gHeight = Math.floor(window.innerHeight * window.devicePixelRatio);
+            
+            game = new Phaser.Game(BALL.W, BALL.H, Phaser.AUTO, 'gameDiv');
+            
+            console.log(game.scale);
+            BALL.scaleRatio = window.devicePixelRatio;
+            
+            game.state.add('preload', BALL.preload);
+            //game.state.add('menu', BALL.menu);
+            game.state.add('play', BALL.play);
+                
+            game.state.start('preload');
+            
+            var imgDiv = document.getElementById('imgScroll');
+            function scrollHorizontally(e) {
+                e = window.event || e;
+                var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+                imgDiv.scrollLeft -= (delta*40); // Multiplied by 40
+                e.preventDefault();
+            }
+            if (imgDiv.addEventListener) {
+                // IE9, Chrome, Safari, Opera
+                imgDiv.addEventListener("mousewheel", scrollHorizontally, false);
+                // Firefox
+                imgDiv.addEventListener("DOMMouseScroll", scrollHorizontally, false);
+            } else {
+                // IE 6/7/8
+                imgDiv.attachEvent("onmousewheel", scrollHorizontally);
+            }
+
+        };
+        
+    </script>
+        
+        <div id="gameDiv">
+        </div>
+        <div id="editorDiv">
+            <div id="leftPanel" class="editorPanel">
+                
+                <div id="selectionDiv" class="editorSection">
+                    <div id="imgScroll">
+                        <div id="imgsDiv1" class="imgsDiv">
+
                         </div>
                     </div>
                     
-                </a>
-            </div>
-            
-            
-            <div class="project-div" id="gulp-div">
-                <div class="project-label">
-                    HTML5 Mobile Javascript Game
+                    <label id="selectedLbl" class="editorLbl">Nothing Selected</label>
+                    
+                    <br />
+                    
+                    <div class="editorImg" id="curSelectionDiv">
+                        <img id="curSelectionImg" src="assets/plats/p1_flat.png">
+                    </div> 
+                    
+                    <br />
+                    
+                    <span id="existsSpan" class="optionSpan">
+                        <label class="editorLbl">Exists?</label>
+                        <input type="checkBox" class="editorChk" text="exists: ">
+                    </span>
+                    
+                    <br />
+                    
+                    
+                    <span id="rotationSpan" class="optionSpan">
+                        <label class="editorLbl">Rot Speed:</label>
+                        <input type="number" step=5 value=0 class="editorNumInput" id="rotSpeedVal">
+                    </span>
+                    
+                    <span id="angleSpan" class="optionSpan">
+                        <label class="editorLbl">Angle:</label>
+                        <input type="number" step=5 value=0 class="editorNumInput" id="angleVal">
+                    </span>
+                    <a id="downloadLevel">Download Level</a>
+                    <button id="delSelectedBtn" class="botRightBtn btn">Delete</button>
+                    <button id="saveLvlBtn" class="botLeftBtn btn">Save Level</button>
                 </div>
-                <a href="projects/gulp.html">
-                    <div class="img-overlay"></div>
-                    <div class="img-div">
-                        <div class="project-name">
-                            Gulp!
+                
+                <div id="objDetailDiv" class="editorSection">
+                    
+                    <div id="movePathsDiv" class="propSelectDiv">
+                        
+                        <span class="groupSpan" id="mPathGroupSpan">
+                            <label class="editorLbL">Move Paths:</label>
+                            <button class="rightBtn btn" id="newPathBtn" onclick="BALL.editorUI.createMovePath()">New Path</button>
+                        </span>
+                        
+                        <select size=5 class="propSelectBox" id="mPathSelect">
+                            <option val=0>0__________Back and Forth[default]</option>
+                            <option val=1>1__________Sped Up</option>
+                            <option val=2>2__________Slowed Down</option>
+                        </select>
+                        
+                        <span class="groupSpan" id="mPathButtonsSpan">
+                            <button class="rightBtn btn" id="editPathBtn">Edit Path</button>
+                            <button class="leftBtn btn" id="delPathBtn">Delete Path</button>
+                        </span>
+                        
+                    </div><!-- MOVE PATHS DIV -->
+                    
+                    
+                    
+                    <div id="triggersDiv" class="propSelectDiv">
+                        
+                        <span class="groupSpan" id="triggersSpan">
+                            <label class="editorLbL">Triggers:</label>
+                            <button class="rightBtn btn" id="newTriggerBtn">New Trigger</button>
+                        </span>
+                        
+                        <select size=5 class="propSelectBox" id="triggerSelect">
+                            <option val=0>0__________Back and Forth[default]</option>
+                            <option val=1>1__________Sped Up</option>
+                            <option val=2>2__________Slowed Down</option>
+                        </select>
+                        
+                        <span class="groupSpan" id="triggerButtonsSpan">
+                            <button class="rightBtn btn" id="editTriggerBtn">Edit Trigger</button>
+                            <button class="leftBtn btn" id="delTriggerBtn">Delete Trigger</button>
+                        </span>
+                        
+                    </div><!-- TRIGGERS DIV -->
+                    
+                    
+                </div><!-- EDITOR SECTION DIV -->
+                
+                <div id="objEditorDiv" class="editorSection">
+                    <div class="propEditDiv" id="pathEditDiv">
+                        
+                        <div class="propSelectDiv">
+                            <span class="groupSpan" id="pathPointBtnSpan">
+                                <label class="editorLbL">Path Points: </label>
+                                <button class="rightBtn btn" id="createPointBtn">Add Point</button>
+                            </span>
+                            <select size=5 class="propSelectBox" id="pathPointSelect">
+                                <option val=0>0__________Back and Forth[default]</option>
+                                <option val=1>1__________Sped Up</option>
+                                <option val=2>2__________Slowed Down</option> 
+                            </select>
+                            <span class="groupSpan" id="pathPointBtnSpan"> 
+                                <button class="leftBtn btn" id="deletePointBtn">Delete Point</button>
+                                <button class="rightBtn btn" id="editPointBtn">Edit Point</button>
+                            </span>
+                            <span class="groupSpan" id="startPathBtnSpan">
+                                <button class="leftBtn btn" id="startPathBtn">Start Path</button>
+                                <button class="rightBtn btn" id="stopPathBtn">Stop Path</button>
+                            </span>
                         </div>
-                    </div>
-                </a>
-            </div>
-            
-             <div class="project-div" id="white-glove-div">
-                <div class="project-label">
-                    Website | Freelance
+                        
+                    </div><!-- pathEditDiv -->
+
+
+                    <div class="propEditDiv" id="trigEditDiv">
+                        <div class="propSelectDiv">
+                            <span class="groupSpan">
+                                <b> <label class="editorLbl" id="trigNameLbl">NAME  -  </label></b>  <label class="editorLbL">  Trigger Type: </label>
+                            </span>
+                            <select size=4 class="propSelectBox" id="trigTypeSelect">
+                                <option value=1>1. On Contact</option>
+                                <option value=2>2. Path Complete</option>
+                                <option value=3>3. On Create</option> 
+                                <option value=4>4. On Destroy</option> 
+                            </select>
+                        </div>
+                        
+                        <div class="propSelectDiv">
+
+                            <div class="smallDiv" id="addEventDetDiv">
+                                <label class="editorLbL">Parameters:</label> 
+                                <br />
+                                <div class="smallDiv">
+                                    <label class="smLbl" id="tParamLbl1">param 1:</label><br />
+                                    <input type="number" class="evParamTxt" id="tParam1">
+                                </div>
+                                <div class="smallDiv">
+                                    <label class="smLbl" id="tParamLbl2">param 2:</label><br />
+                                    <input type="number" class="evParamTxt" id="tParam2">
+                                </div>
+                                
+                            </div>
+
+                            
+                        </div>
+                        
+                        <div class="propSelectDiv">
+                           
+                            <select size=4 class="propSelectBox" id="trigEventsSelect">
+                                <option value=1>...NO EVENTS...</option>
+                            </select>
+                            
+                            <span class="groupSpan centered">
+                                <button class="btnleft btn" id="removeEventBtn">Delete</button>
+                                <button class="btnRight btn" id="addEventBtn">Add</button>
+                            </span>
+                        </div>
+                        
+                        
+                    </div><!-- trig edit div -->
+                    
+
+                        
+                </div><!--ObjEditorDiv -->
+                
+                <div class="editorSection" id="eventEditorSection">
+                    
+                    <div class="eventGroupDiv" id="eventEditDiv">
+                        <span class="groupSpan">
+                            <label class="editorLbL" id="eventNameLbl">Event Name</label>
+                            <label class="editorLbL rightBtn">Event Type:</label>
+                        </span>
+                        <select size=4 class="propSelectBox" id="eventTypeSelect">
+                            <option value=1>1. Kill</option>
+                            <option value=2>2. Spawn</option>
+                            <option value=3>3. Start Movepath</option> 
+                            <option value=4>4. Stop Movepath</option> 
+                            <option value=5>5. Apply Force</option> 
+                            <option value=6>6. Apply Torque</option> 
+                            <option value=7>7. Toggle</option>
+                        </select>
+                        <br />
+                        
+                         <!----------------SPACE UNDER SELECT EVENT TYPE------------------>
+                        <div class="smallDiv">
+                            <button class="selTarBtn" id="selectEventTargetBtn" disabled>Select Target</button>
+                        </div>
+
+                        <div class="smallDiv">
+                            <label class="editorLbl" id="eParamLbl1">Param 1</label>
+                            <input type="number" class="eParamInput" id="eParam1">
+                        </div>
+                        <div class="smallDiv">
+                            <label class="editorLbl" id="eParamLbl2">Param 1</label>
+                            <input type="number" class="eParamInput" id="eParam2">
+                        </div>
+                        
+                        <!----------------- ADD / REMOVE EVENT BTNS ----------------->
+                        <span class="groupSpan centered">
+                            <button class="rightBtn btn" id="createEventBtn">Create</button>
+                        </span>
+                        
+                    </div><!-- event edit div -->
                 </div>
-                <a href="projects/whiteglove.html">
-                    <div class="img-overlay"></div>
-                    <div class="img-div">
-                        <div class="project-name">
-                            White Glove Cleaning
-                        </div>
-                    </div>
-                </a>
-            </div> 
-            
-            
-            <div class="project-div" id="libra-div">
-                <div class="project-label">
-                    Android Game App | Freelance
-                </div>
-                <a href="projects/libra.html">
-                    <div class="img-overlay"></div>
-                    <div class="img-div">
-                        <div class="project-name">
-                            Libra Math Game
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            
-            <div class="project-div" id="phaser-div">
-                <div class="project-label">
-                    Javascript | Freelance
-                </div>
-                <a href="projects/phaser.html">
-                    <div class="img-overlay"></div>
-                    <div class="img-div">
-                        <div class="project-name">
-                            Phaser - Box2D Examples
-                        </div>
-                    </div>
-                </a>
-            </div>
-            
-            
+                
+            </div><!-----------------::: EDITOR PANEL :::-------------->
             
 
-            
-             <div class="project-div" id="tasktime-div">
-                <div class="project-label">
-                    Ruby on Rails Web App
-                </div>
-                <a href="projects/tasktime.html">
-                    <div class="img-overlay"></div>
-                    <div class="img-div">
-                        <h2>TASKTIME <br><br>(WORK IN PROGRESS)</h2>
-                        <div class="project-name">
-                            Let's Play, 100 Card, Dice, Board, and Domino Games
-                        </div>
-                    </div>
-                </a>
-            </div> 
-            
-        </main>
-        
-        
+        </div>
         
         
     </body>
+    
+    <script>
+    
+    (function() {
+
+})();
+    
+    </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
