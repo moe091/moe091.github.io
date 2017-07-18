@@ -85,6 +85,15 @@ BALL.gameState = {
                 
             }
         }  
+        if (sprite.movePaths != null && sprite.movePaths[0] != null) {
+            console.log("Starting movepath ", sprite + ", path: ", sprite.movePaths[0]);
+            sprite.movePaths[0].start();
+        }
+    },
+    
+    resetLevel: function() {
+        BALL.timer.reset();
+        this.resurrectObjs();
     },
     
     destroyObject: function(sprite) {
@@ -97,7 +106,8 @@ BALL.gameState = {
     },
     
     killCallback: function(obj, ball) {
-        console.log(obj.sprite.key);
+        if (obj != null)
+            console.log(obj.sprite.key);
         BALL.play.ball.kill();
         BALL.play.ball_back.kill();
         BALL.play.ball_face.kill();
@@ -158,6 +168,10 @@ BALL.gameState = {
         for (var i in this.objects) {
             for (var j in this.objects[i].triggers) {
                 this.objects[i].triggers[j].done = false;
+            }
+            if (this.objects[i].alive == false & this.objects[i].startsDead != true) {
+                console.log("rezzing object #" + this.objects[i].ID + ", " + this.objects[i].key);
+                this.restoreObject(this.objects[i]);
             }
         }
     }
