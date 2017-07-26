@@ -11,7 +11,9 @@ BALL.timer = {
         if (typeof func == "string") {
             func = BALL.EventFuncs[func];
         }
-        this.tEvents.push(new BALL.TimerEvent(func, parent, interval, repeat, args));
+        var e = new BALL.TimerEvent(func, parent, interval, repeat, args);
+        this.tEvents.push(e);
+        return e;
     },
     
     removeEvent: function(ev) {
@@ -34,6 +36,9 @@ BALL.timer = {
     
     reset: function() {
         this.tEvents = this.startEvents.slice();
+        for (var i in this.tEvents) {
+            this.tEvents[i].reset();
+        }
     }
 }
 
@@ -50,14 +55,24 @@ BALL.TimerEvent = function(func, parent, interval, repeat, args) {
     this.interval = interval;
     this.repeat = repeat;
     this.args = args;
+    this.offset = 0;
     
     this.done = false;
     if (this.args != null && this.args[0] != null) {
         this.offset = this.args[0];
+        this.doneOffset = false;
     } else {
         this.offset = 0;
+        this.doneOffset = true;
     }
     this.countDown = interval;
+    
+    if (parent != null) {
+        if (parent.tEvents == null) {
+            parent.tEvents = [];
+        }
+        parent.tEvents.push(this);
+    }
 }
 
 //interval = 600, offset = 200
@@ -75,24 +90,38 @@ BALL.TimerEvent.prototype.update = function(elapsed) {
     **/
     
     
-    if (this.countDown <= 0) { //reset countdown every time timer reaches 0 or less. If offset = 0 call func.
-        if (this.offset == 0) {
+    if (this.countDown <= 0) {
+        if (this.doneOffset) {
             this.func(this.parent, this.args);
+
+
+            if (this.repeat) {
+                this.countDown = this.interval + this.countDown;
+                this.done = false;
+            } else {
+                BALL.timer.removeEvent(this);
+            }
         } else {
-            BALL.timer.pushEvent(this.func, this.parent, this.offset, false, null);
-        }
-        
-        if (this.repeat) {
-            this.countDown = this.interval + this.countDown;
-            this.done = false;
-        } else {
-            BALL.timer.removeEvent(this);
+            this.countDown+= this.offset;
+            this.doneOffset = true;
+            console.log("ENDING OFFSET - ", this.parent);
+            console.log("NEW COUNTDOWN: " + this.countDown);
         }
         
     }
     
 }
 
+BALL.TimerEvent.prototype.reset = function() {
+    
+    this.done = false;
+    this.countDown = this.interval;
+    if (this.offset == 0) {
+        this.doneOffset = true;
+    } else {
+        this.doneOffset = false;
+    }
+}
 
 
 
