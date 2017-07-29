@@ -270,9 +270,11 @@ BALL.editor = {
         if (this.selected != null && !this.pathSpriteSelected) {
             
             if (BALL.editorUI.rotValue != null) {
-                this.selected.rotSpeed = BALL.editorUI.rotValue;
+                //this.selected.rotSpeed = Number($("#rotSpeedVal"));
                 
                 if (this.selected.rotateUpdate == null) {
+                    console.log("adding rotateUpdate function");
+                    console.log(this.selected);
                     this.selected.rotateUpdate = BALL.gObject.rotateUpdate(BALL.editorUI.rotValue, this.selected);
                     this.selected.updateFuncs.push(this.selected.rotateUpdate);
                 }
@@ -403,6 +405,7 @@ BALL.editor = {
         this.gObjs.push("chalkbreak");
         this.gObjs.push("launcher-stop");
         this.gObjs.push("d01-boulder");
+        this.gObjs.push("d01-killboulder");
 
         //special
         this.gObjs.push("k01-redline");
@@ -423,7 +426,7 @@ BALL.editor = {
         for (var i in this.gObjs) {
             console.log(this.gObjs[i]);
             
-            $("#imgsDiv1").append("<div id='imgDiv-" + i + "' class='editorImg'><img src='assets/graphics/world1/" + this.gObjs[i] + ".png' id='edImg-" + i + "'></div>");
+            $("#imgsDiv1").append("<div id='imgDiv-" + i + "' class='editorImg'><img src='assets/graphics/world2/" + this.gObjs[i] + ".png' id='edImg-" + i + "'></div>");
             $("#imgDiv-" + i).click({index: Number(i)}, function(event) {
                 BALL.editorUI.clickObject(event.data.index);
             });

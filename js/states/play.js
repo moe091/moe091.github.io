@@ -11,12 +11,12 @@ BALL.play = {
         game.world.setBounds(0, 0, 7860, 2500);
         game.time.advancedTiming = true;
         game.physics.startSystem(Phaser.Physics.P2JS);
-        game.physics.p2.gravity.y = 1650;
+        game.physics.p2.gravity.y = 950;
         game.physics.p2.friction = 42;
         game.physics.p2.restitution = 0.25;
         game.physics.p2.setImpactEvents(true);
         
-        game.camera.scale.setTo(1);
+        game.camera.scale.setTo(0.5);
         
         //this.bg = game.add.sprite(0, 0, "graybg")
         //this.bg.fixedToCamera = true;
@@ -34,34 +34,26 @@ BALL.play = {
         **/
         
         
-        //this.bg2 = game.add.tileSprite(0, 0, 7860, 2500, "chalkbg");
+        this.bg = game.add.tileSprite(0, 0, 7860, 2500, "bg");
+        this.bg.fixedToCamera = true;
         
         
         
         
-        this.ball_face = game.add.sprite(0, 0, "ball_face");
-        this.ball_face.anchor.setTo(0.5, 0.5);
-        
-        this.ball_back = game.add.sprite(0, 0, "ball");
-        this.ball_back.anchor.setTo(0.5, 0.5);
-        
-        this.ball = game.add.sprite(1750, 1700, "");
+        this.ball = game.add.sprite(1750 / 2, 1700 / 2, "chalkball");
         this.ball.anchor.setTo(0.5, 0.5);
         
-        this.ball.addChild(this.ball_face);
-        this.ball.addChild(this.ball_back);
         
         BALL.bController.ball = this.ball;
         
         
         
         game.physics.p2.enable(this.ball, false);
-        this.ball.body.setCircle(32);
+        this.ball.body.setCircle(16);
+        
         //this.ball.body.gravity.y = 1000;
         
         
-        this.ball_face.body.destroy();
-        this.ball_back.body.destroy();
         
         BALL.gameState.ballMaterial = game.physics.p2.createMaterial('ballMat', this.ball.body);
         
@@ -90,6 +82,10 @@ BALL.play = {
         
         this.follow();
         game.camera.scale.setTo(0.5);
+        
+        
+        
+        
         
         
         //this.endGame();
@@ -126,7 +122,6 @@ BALL.play = {
         BALL.timer.update();
         
             
-        
         //update BG POSITION:::
         //this.bg.cameraOffset.x = this.ball.x * -0.05;
         //this.bg.cameraOffset.y = this.ball.y * -0.05 - 20;
@@ -143,7 +138,7 @@ BALL.play = {
         this.shroom2.y = 2480 + (this.ball.y - 2072) * 0.2;
         **/
         
-        
+        /**
         this.ball_face.angle = (this.ball.body.angle * -1) - this.ball.body.angularVelocity;
         if (this.ball.body.angularVelocity > 35) {
             this.ball_face.angle+= 35;
@@ -153,6 +148,8 @@ BALL.play = {
             this.ball_face.angle = (this.ball.body.angle * -1) - this.ball.body.angularVelocity;
             this.ball_face.angle+= this.ball.body.angularVelocity;
         }
+        **/
+        
         
         if (BALL.editor != null && BALL.editor.editMode) {
             //BALL.editor.update();
