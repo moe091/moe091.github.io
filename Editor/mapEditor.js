@@ -41,9 +41,16 @@ BALL.editor = {
                 this.curEditor.select(sprite);
             }
             this.selected = sprite;
+            console.log(sprite);
+            console.log(game.input);
+            console.log("sprite - " + sprite.x + ", " + sprite.y);
+            console.log("input - " + (game.input.worldX / game.camera.scale.x) + ", " + (game.input.worldY / game.camera.scale.y));
+            console.log(game.camera);
         } else {
-            this.targetSelect.selectTarget(sprite);
-            this.targetSelect = null;
+            console.log(game.input.activePointer);
+            var sel = this.targetSelect;
+            //this.targetSelect = null;
+            sel.selectTarget(sprite, game.input.activePointer.worldX, game.input.activePointer.worldY);
         }
     },
     
@@ -189,7 +196,6 @@ BALL.editor = {
         scrollCamera: function() {
         //CAMERA MOVEMENT
         if (BALL.input.W.isDown) {
-            console.log("WWWW");
             game.camera.y-= 5;
         }
         if (BALL.input.A.isDown) {
@@ -269,8 +275,8 @@ BALL.editor = {
     updateRotation: function() {
         if (this.selected != null && !this.pathSpriteSelected) {
             
-            if (BALL.editorUI.rotValue != null) {
-                //this.selected.rotSpeed = Number($("#rotSpeedVal"));
+            if (BALL.editor.selected.rotSpeed != null && BALL.editor.selected.rotSpeed != 0) {
+                
                 
                 if (this.selected.rotateUpdate == null) {
                     console.log("adding rotateUpdate function");
@@ -401,11 +407,14 @@ BALL.editor = {
         this.gObjs.push("bigplat");
         //this.gObjs.push("w1-tree-plat")
         this.gObjs.push("chalkbig");
+        this.gObjs.push("woodbig");
         this.gObjs.push("chalksmall");
         this.gObjs.push("chalkbreak");
         this.gObjs.push("launcher-stop");
         this.gObjs.push("d01-boulder");
         this.gObjs.push("d01-killboulder");
+        this.gObjs.push("hanging-plank");
+        this.gObjs.push("rope");
 
         //special
         this.gObjs.push("k01-redline");

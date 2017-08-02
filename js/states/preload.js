@@ -12,10 +12,10 @@ BALL.preload = {
         //ball
         //game.load.image("ball", "assets/graphics/char-wheel.png");
         //game.load.image("ball_face", "assets/graphics/char-face.png");
-        game.load.image("bg", "assets/graphics/world2/bg.png");
-        game.load.image("front", "assets/graphics/world2/front.png");
-        game.load.image("pillars", "assets/graphics/world2/pillars.png");
-        game.load.image("stalags", "assets/graphics/world2/stalags.png");
+        //game.load.image("bg", "assets/graphics/world2/bg.png");
+        game.load.image("water", "assets/graphics/world2/water.png");
+        game.load.image("sky", "assets/graphics/world2/sky.png");
+        game.load.image("shipBG", "assets/graphics/world2/shipBG.png");
         
         game.load.image("chalkball", "assets/graphics/crappyball.png");
         //game.load.image("purpChar", "assets/graphics/purpchar.png");
@@ -25,8 +25,13 @@ BALL.preload = {
         
         
         game.load.image("chalkbig", "assets/graphics/world2/chalkbig.png");
+        game.load.image("woodbig", "assets/graphics/world2/woodbig.png");
         game.load.image("chalksmall", "assets/graphics/world2/chalksmall.png");
         game.load.image("chalkbreak", "assets/graphics/world2/chalkbreak.png");
+        
+        
+        game.load.image("hanging-plank", "assets/graphics/world2/hanging-plank.png");
+        game.load.image("rope", "assets/graphics/world2/rope.png");
         
         
         //game.load.image("w1-iceplat", "assets/graphics/world2/w1-iceplat.png");
